@@ -1,7 +1,4 @@
-use std::{
-    char::UNICODE_VERSION,
-    process::{Command, ExitCode},
-};
+use std::process::{Command, ExitCode};
 
 struct Check {
     name: &'static str,
