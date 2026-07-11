@@ -1,1 +1,0 @@
-/home/ibrahim/Projects/ai_from_scratch/ai_engineering/phases/00-setup-and-tooling/01-dev-environment/code/target/debug/code: /home/ibrahim/Projects/ai_from_scratch/ai_engineering/phases/00-setup-and-tooling/01-dev-environment/code/main.rs
