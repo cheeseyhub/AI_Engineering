@@ -2,3 +2,11 @@
 node_modules
 target/
 
+
+*.bin
+*.safetensors
+*.pt
+*.onnx
+data/*.parquet
+data/*.csv
+models/
