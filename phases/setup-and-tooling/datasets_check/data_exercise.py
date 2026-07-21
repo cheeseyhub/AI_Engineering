@@ -19,7 +19,7 @@ from datasets import load_dataset
 
 
 
-# 03 Converting dataset to Parquet and csv
+# 03 Converting database to Parquet and csv
 # dataset = load_dataset("nyu-mll/glue","mrpc",split="train");
 # dataset.to_csv("glue.csv");
 # dataset.to_parquet("glue.parquet")
