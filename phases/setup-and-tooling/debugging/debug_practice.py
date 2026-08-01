@@ -1,6 +1,5 @@
 import sys
 import time
-from torch.utils.tensorboard import SummaryWriter # type: ignore
 import tracemalloc
 import logging
 
@@ -154,9 +153,6 @@ def demo_shape_checking():
         nn.ReLU(),
         nn.Linear(64, 10),
     )
-
-
-
     sample = torch.randn(4, 784)
     check_shapes(model, sample)
 
