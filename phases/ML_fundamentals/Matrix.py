@@ -43,20 +43,24 @@ class Matrix:
        return  f"Matrix({self.rows}"
                     
 
-weights = Matrix([[random.gauss(0,0.1) for _ in range(3)] for _ in range(2)])
-input_vector = Vector([1.0,0.5,-0.3]);
+def main():
+    weights = Matrix([[random.gauss(0,0.1) for _ in range(3)] for _ in range(2)])
+    input_vector = Vector([1.0,0.5,-0.3]);
 
-print(f"Weights : {weights}")
-print(f"input_vector : {input_vector}")
+    print(f"Weights : {weights}")
+    print(f"input_vector : {input_vector}")
 
-output = weights @ input_vector;
+    output = weights @ input_vector;
 
-print(f"Input (3D): {input_vector}");
-print(f"Output (2D): {output}");
+    print(f"Input (3D): {input_vector}");
+    print(f"Output (2D): {output}");
 
-print("This is what a neural neowrk layer does -- matrix multiplication")
+    print("This is what a neural neowrk layer does -- matrix multiplication")
         
 
+
+if __name__ == "__main__":
+    main();
 
 
 

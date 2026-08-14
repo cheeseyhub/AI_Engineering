@@ -6,8 +6,9 @@ class Vector:
     def __add__(self, other):
         return Vector([a+b for a,b in zip(self.components,other.components)]);
 
-    def __sub__(self,other):
-        return Vector([a-b for a,b in zip(self.components,other.components)]);
+    def __sub__(self, other):
+        return Vector([a - b for a, b in zip(self.components, other.components)])
+
     # def dot(self,other):
     #     result = 0;
     #     for a,b in zip(self.components,other.components):
@@ -28,19 +29,22 @@ class Vector:
     def __repr__(self) -> str:
         return f"{self.components}";
 
+def main():
+    
+    a = Vector([1,0,0]); 
+    b = Vector([0,1,0]);
+    # a = Vector([1, 2, 3])
+    # b = Vector([4, 5, 6])
 
-a = Vector([1,0,0]); 
-b = Vector([0,1,0]);
+    # print(f"a + b = {a + b}")
+    # print(f"a · b = {a.dot(b)}")
+    # print(f"|a| = {a.magnitude():.4f}")
+    # print(f"cosine similarity = {a.cosine_similarity(b):.4f}")
 
 
-print (a.dot(b));
+    print (a.dot(b));
+
+if __name__ == "__name__":
+    main();
 
 
-
-# a = Vector([1, 2, 3])
-# b = Vector([4, 5, 6])
-
-# print(f"a + b = {a + b}")
-# print(f"a · b = {a.dot(b)}")
-# print(f"|a| = {a.magnitude():.4f}")
-# print(f"cosine similarity = {a.cosine_similarity(b):.4f}")
