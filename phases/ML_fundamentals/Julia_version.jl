@@ -9,5 +9,5 @@ println("Cosine similarity", dot(a , b) / (sqrt(dot(a,a)) * sqrt(dot(b,b))));
 # Matrix-vector multiplication
 W = [0.1 -0.2 0.3; 0.4 0.5 -0.1]
 x = [1.0, 0.5, -0.3]
-println("Wx = ", W * x)
+println("wx = ", w * x)
 println("This is a neural network layer.")
