@@ -1,5 +1,5 @@
 {
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.typeCheckingMode": "off",
     "editor.formatOnSave": true,
     "notebook.output.scrolling": true,
     "files.autoSave": "afterDelay"

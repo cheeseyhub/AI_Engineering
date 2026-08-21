@@ -6,8 +6,34 @@ from  Vector import Vector;
 class Matrix:
     def __init__(self,rows) -> None:
         self.rows = [list(row) for row in rows];
-        self.shape = (len(self.rows), len(self.rows[0]));
+        self.shape = [ len(self.rows), len(self.rows[0]) ];
 
+    def __add__(self, other):
+        return Matrix(
+            [self.rows[i][j] + other.rows[i][j] for i in range(self.shape[0])]
+            for j in range(self.shape[1])
+        )
+    def __sub__(self, other):
+        return Matrix(
+            [self.rows[i][j] - other.rows[i][j] for i in range(self.shape[0])]
+            for j in range(self.shape[1])
+        )
+    def scalar_mult(self,scalar: int | float):
+        return Matrix([ self.rows[i][j] * scalar for j in range(self.shape[1]) ]
+        for i in range(self.shape[0])
+        )
+    def elemet_wise_multiply(self, other):
+        return Matrix(
+            [self.rows[i][j] * other.rows[i][j] for j in range(self.shape[1])]
+            for i in range(self.shape[1])
+        )
+
+
+
+            
+        
+        
+                
     def __matmul__(self, other):
         if(isinstance(other,Vector)):
 
@@ -17,6 +43,7 @@ class Matrix:
                     for i in range(self.shape[0])
                 ]
             )
+    
 
         rows = [];
         for i in range(self.shape[0]):
@@ -60,13 +87,6 @@ def main():
     # print("This is what a neural neowrk layer does -- matrix multiplication")
 
     # 2D Scaling Matrix that doubles the x and triples the y coordinate then apply it to [1,1] ;
-    a = Vector([1,1]);
-
-
-    scaling_matrix = Matrix([
-        [2,0],
-        [0,3],
-    ])
 
 
 

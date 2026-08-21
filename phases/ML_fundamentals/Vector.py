@@ -11,6 +11,10 @@ class Vector:
     def __sub__(self, other):
         return Vector([a - b for a, b in zip(self.components, other.components)])
 
+    def __mul__(self, scalar: int | float):
+        return Vector([scalar * x for x in self.components]);
+
+        
     def dot(self,other):
         return sum([a * b  for a,b in zip(self.components,other.components)]);
 
@@ -31,16 +35,13 @@ class Vector:
         divisor = self.magnitude() * other.magnitude();
         return math.degrees(math.acos(dot / divisor));
 
-        
-
-
     def __repr__(self) -> str:
         return f"{self.components}";
 
 def main():
     
-    a = Vector([1,0,0]); 
-    b = Vector([0,1,0]);
+    # a = Vector([1,0,0]); 
+    # b = Vector([0,1,0]);
     # a = Vector([1, 2, 3])
     # b = Vector([4, 5, 6])
 
@@ -57,21 +58,26 @@ def main():
     # print(v1.dot(v2) / v2.magnitude())
 
     #02 50 dimension matrix
-    vectors = [Vector([np.random.random()  for i in range(50)]) for i in range(5)];
-    print(len(vectors))
+    vectors = [Vector([np.random.random()  for i in range(50)]) for j in range(5)];
 
 
-    max_smiliarity = vectors[0].cosine_similarity(vectors[1]);
-    vectors_that_are_most_similar = [1,2]
+    max_smiliarity = -math.inf;
+    similar_vectors = [None,None]
     for i in range(1, len(vectors)):
-        current = vectors[i -1].cosine_similarity(vectors[i]);
-        if current  > max_smiliarity:
-            max_smiliarity = current;
-            vectors_that_are_most_similar[0] =vectors[i-1];
-            vectors_that_are_most_similar[1] =vectors[i];
+        for j in range(0,len(vectors) -1):
+            current_smilarity =vectors[i].cosine_similarity(vectors[j]) 
+            if i != j and current_smilarity > max_smiliarity:
+                print("here")
+                max_smiliarity = current_smilarity;
+                similar_vectors[0] = vectors[i];
+                similar_vectors[1] = vectors[j];
 
+                
+
+            
+
+    print(similar_vectors)
     print(max_smiliarity)
-    print(vectors_that_are_most_similar)
 
 
 
