@@ -107,7 +107,13 @@ class Matrix:
     def inverse_2x2(self):
         if self.shape != [2,2]:
             return "This Matrix is not 2 x 2"
+    
         deter = self.determinant();
+
+        if deter == 0:
+            return Matrix([[0],[0]])
+
+    
         mat_copy = Matrix(
             [self.rows[i][j] for j in range(self.shape[1])]
             for i in range(self.shape[0])
@@ -126,6 +132,12 @@ class Matrix:
                 mat_copy.rows[row][col] = mat_copy.rows[row][col] / deter;
         
         return mat_copy
+    
+    def is_identity_matrix(self):
+        for i in range(self.shape[0]):
+                if self.rows[i][i] != 1:
+                    return False
+        return True;
 
                
     def __repr__(self) -> str:
@@ -145,14 +157,14 @@ def main():
     # print(f"Output (2D): {output}");
 
     # print("This is what a neural neowrk layer does -- matrix multiplication")
+    A = Matrix([
+        [0,0],
+        [4,0]
+    ]
+    )
 
+    print(A @ A.inverse_2x2())
 
-
-    mat = Matrix([
-        [1,2],
-        [2,-1],
-        ])
-    print(mat.inverse_2x2())
 
 
 
