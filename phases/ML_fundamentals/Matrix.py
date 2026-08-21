@@ -66,7 +66,67 @@ class Matrix:
            rows.append(row);
        return rows;
 
+       
+    def determinant(self):
+        if self.shape == [1,1]:
+            return self.rows[0];
+
+        if self.shape == [2,2]:
+            return (self.rows[0][0] * self.rows[1][1]) - (self.rows[0][1] * self.rows[1][0])
+
+
+        det = 0;
+
+        for j in range(self.shape[1]):
+            cofactor = ((-1) ** j);
+            multipler = self.rows[0][j];
+            minor = [];
+            # one skips the row
+            for row in range(1,self.shape[0]):
+                minor_row = [];
+                for col in range(self.shape[1]):
+                    # this skips the column
+                    if col != j:
+                        minor_row.append(self.rows[row][col]);
+                minor.append(minor_row)
+            minor_matrix = Matrix(minor);
+            det += cofactor * multipler * minor_matrix.determinant();
+        return det;
+
+
+        # det = 0;
+        # for j in range(self.shape[1]) :
+        #     minor = Matrix([
+        #         [self.rows[i][k] for k in range(self.shape[1]) if k !=j]
+        #         for i in range(1,self.shape[0])
+        #     ])
+        #     det += ((-1) ** j) * (self.rows[0][j] * minor.determinant());
+        # return det;
+
         
+    def inverse_2x2(self):
+        if self.shape != [2,2]:
+            return "This Matrix is not 2 x 2"
+        deter = self.determinant();
+        mat_copy = Matrix(
+            [self.rows[i][j] for j in range(self.shape[1])]
+            for i in range(self.shape[0])
+        )
+
+        # swap diagonal
+        mat_copy.rows[0][0] , mat_copy.rows[1][1] = mat_copy.rows[1][1] , mat_copy.rows[0][0];
+
+        # change sign of other diagonal
+        mat_copy.rows[0][1] *= -1;
+        mat_copy.rows[1][0] *= -1;
+
+        
+        for row in range(mat_copy.shape[0]):
+            for col in range(mat_copy.shape[1]):
+                mat_copy.rows[row][col] = mat_copy.rows[row][col] / deter;
+        
+        return mat_copy
+
                
     def __repr__(self) -> str:
        return  f"Matrix({self.rows}"
@@ -86,8 +146,13 @@ def main():
 
     # print("This is what a neural neowrk layer does -- matrix multiplication")
 
-    # 2D Scaling Matrix that doubles the x and triples the y coordinate then apply it to [1,1] ;
 
+
+    mat = Matrix([
+        [1,2],
+        [2,-1],
+        ])
+    print(mat.inverse_2x2())
 
 
 
