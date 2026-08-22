@@ -57,15 +57,45 @@ class Matrix:
             rows.append(row);
         return Matrix(rows);
     def tranpose(self):
-       rows = [];
-       
-       for i in range(self.shape[1]):
-           row = []
-           for j in range(self.shape[0]):
-               row.append( self.rows[j][i])
-           rows.append(row);
-       return rows;
+        return Matrix([
+            [self.rows[j][i] for j in range(self.shape[0])]
+            for i in range(self.shape[1])
+        ])
 
+    def inverse_2x2(self):
+        if self.shape != [2,2]:
+            return "This Matrix is not 2 x 2"
+    
+        deter = self.determinant();
+
+        if deter == 0:
+            return Matrix([[0],[0]])
+
+    
+        mat_copy = Matrix(
+            [self.rows[i][j] for j in range(self.shape[1])]
+            for i in range(self.shape[0])
+        )
+
+        # swap diagonal
+        mat_copy.rows[0][0] , mat_copy.rows[1][1] = mat_copy.rows[1][1] , mat_copy.rows[0][0];
+
+        # change sign of other diagonal
+        mat_copy.rows[0][1] *= -1;
+        mat_copy.rows[1][0] *= -1;
+
+        
+        for row in range(mat_copy.shape[0]):
+            for col in range(mat_copy.shape[1]):
+                mat_copy.rows[row][col] = mat_copy.rows[row][col] / deter;
+        
+        return mat_copy
+    
+    def is_identity_matrix(self):
+        for i in range(self.shape[0]):
+                if self.rows[i][i] != 1:
+                    return False
+        return True;
        
     def determinant(self):
         if self.shape == [1,1]:
@@ -104,42 +134,32 @@ class Matrix:
         # return det;
 
         
-    def inverse_2x2(self):
-        if self.shape != [2,2]:
-            return "This Matrix is not 2 x 2"
-    
-        deter = self.determinant();
 
-        if deter == 0:
-            return Matrix([[0],[0]])
+      
+    def inverse_3x3(self):
+        if self.shape != [3,3]:
+            return "The matrix is not a 3X3 matrix";
+        deter_of_original = self.determinant();
+        mat_copy = Matrix([ self.rows[i][j] for j in range(self.shape[1]) ] for i in range (self.shape[0]))
 
-    
-        mat_copy = Matrix(
-            [self.rows[i][j] for j in range(self.shape[1])]
-            for i in range(self.shape[0])
-        )
 
-        # swap diagonal
-        mat_copy.rows[0][0] , mat_copy.rows[1][1] = mat_copy.rows[1][1] , mat_copy.rows[0][0];
-
-        # change sign of other diagonal
-        mat_copy.rows[0][1] *= -1;
-        mat_copy.rows[1][0] *= -1;
-
-        
-        for row in range(mat_copy.shape[0]):
-            for col in range(mat_copy.shape[1]):
-                mat_copy.rows[row][col] = mat_copy.rows[row][col] / deter;
-        
-        return mat_copy
-    
-    def is_identity_matrix(self):
+            
         for i in range(self.shape[0]):
-                if self.rows[i][i] != 1:
-                    return False
-        return True;
+            for j in range(self.shape[1]):
+                cofactor = (-1) **( i + j);
+                minor = [];
 
-               
+                for minor_row in range(1,self.shape[0]):
+                    row =[] 
+                    for minor_col in range(self.shape[1]):
+                        if minor_col != j  :
+                            row.append(mat_copy.rows[minor_row % self.shape[0]][minor_col % self.shape[1]]);
+                    minor.append(row );
+                self.rows[i][j] = cofactor * Matrix(minor).determinant();
+
+        print(self)
+
+
     def __repr__(self) -> str:
        return  f"Matrix({self.rows}"
                     
@@ -157,14 +177,15 @@ def main():
     # print(f"Output (2D): {output}");
 
     # print("This is what a neural neowrk layer does -- matrix multiplication")
-    A = Matrix([
-        [0,0],
-        [4,0]
+
+    mat3 = Matrix([
+        [3,1,54],
+        [1,1,6],
+        [2,0,99],
     ]
     )
 
-    print(A @ A.inverse_2x2())
-
+    print(mat3.inverse_3x3())
 
 
 
