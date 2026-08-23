@@ -149,15 +149,21 @@ class Matrix:
                 cofactor = (-1) **( i + j);
                 minor = [];
 
-                for minor_row in range(1,self.shape[0]):
+                for minor_row in range(self.shape[0]):
+                    if minor_row == i:
+                        continue;
                     row =[] 
                     for minor_col in range(self.shape[1]):
                         if minor_col != j  :
-                            row.append(mat_copy.rows[minor_row % self.shape[0]][minor_col % self.shape[1]]);
+                            row.append(mat_copy.rows[minor_row][minor_col]);
                     minor.append(row );
                 self.rows[i][j] = cofactor * Matrix(minor).determinant();
 
-        print(self)
+        adjoint_matrix = self.tranpose();
+        return Matrix([
+            round(adjoint_matrix.rows[i][j] / deter_of_original, 10)  for j in range(adjoint_matrix.shape[1])]
+            for i in range(adjoint_matrix.shape[1])
+                      )
 
 
     def __repr__(self) -> str:
@@ -165,28 +171,24 @@ class Matrix:
                     
 
 def main():
-    # weights = Matrix([[random.gauss(0,0.1) for _ in range(3)] for _ in range(2)])
-    # input_vector = Vector([1.0,0.5,-0.3]);
 
-    # print(f"Weights : {weights}")
-    # print(f"input_vector : {input_vector}")
+    inputs = Matrix([[0.5], [0.8], [0.2]])
+    weights = Matrix([
+        [random.uniform(-1, 1) for _ in range(3)]
+        for _ in range(2)
+    ])
+    bias = Matrix([[0.1], [0.1]])
 
-    # output = weights @ input_vector;
+    def relu_matrix(m):
+        return Matrix([[max(0, val) for val in row] for row in m.rows])
 
-    # print(f"Input (3D): {input_vector}");
-    # print(f"Output (2D): {output}");
+    pre_activation = (weights @ inputs) + bias
+    output = relu_matrix(pre_activation)
 
-    # print("This is what a neural neowrk layer does -- matrix multiplication")
-
-    mat3 = Matrix([
-        [3,1,54],
-        [1,1,6],
-        [2,0,99],
-    ]
-    )
-
-    print(mat3.inverse_3x3())
-
+    print(f"Input shape: {inputs.shape}")
+    print(f"Weight shape: {weights.shape}")
+    print(f"Output shape: {output.shape}")
+    print(f"Output: {output.rows}")
 
 
 
