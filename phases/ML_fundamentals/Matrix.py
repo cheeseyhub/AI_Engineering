@@ -10,8 +10,8 @@ class Matrix:
 
     def __add__(self, other):
         return Matrix(
-            [self.rows[i][j] + other.rows[i][j] for i in range(self.shape[0])]
-            for j in range(self.shape[1])
+            [self.rows[i][j] + other.rows[i][j] for j in range(self.shape[1])]
+            for i in range(self.shape[0])
         )
     def __sub__(self, other):
         return Matrix(
@@ -45,6 +45,9 @@ class Matrix:
             )
     
 
+        if self.shape[1] != other.shape[0]:
+            print("The inner dimension do not match")
+            return;
         rows = [];
         for i in range(self.shape[0]):
             row = [];
@@ -56,6 +59,7 @@ class Matrix:
                 
             rows.append(row);
         return Matrix(rows);
+
     def tranpose(self):
         return Matrix([
             [self.rows[j][i] for j in range(self.shape[0])]
