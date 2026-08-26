@@ -37,11 +37,12 @@ class Matrix:
     def __matmul__(self, other):
         if(isinstance(other,Vector)):
 
-            return Vector(
+            return Matrix([
                 [
-                    sum(self.rows[i][j] * other.components[j] for j in range(self.shape[1]) )
-                    for i in range(self.shape[0])
+                    sum(self.rows[i][j] * other.components[j] for j in range(self.shape[1]))
                 ]
+                for i in range(self.shape[0])
+            ]
             )
     
 
