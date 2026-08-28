@@ -48,6 +48,11 @@ def eigenvalues_2x2(matrix,eigenvalue):
    a,b = matrix.rows[0] ;
    c,d = matrix.rows[1] ;
 
+
+    # ax + by = lx 
+    # by = lx - ax -> y = x(l - a) / b ->  y =  l-a 
+    # cx + dy = ly
+    # cx = ly - dy  -> x =  y( l- d) / c ->  x = c ( l -d ) / c -> x = (l -d )
    if b > 1e-10:
     v = Vector([b, eigenvalue -a]);
    elif d > 1e-10:
@@ -141,5 +146,17 @@ def main() :
         print(f"    l*v = {[round(x,4) for x in scaled]}")
 
     
+    print(f"det(rotation 45) = {(rotation_2d(math.pi / 4).determinant())}")
+    print(f"det(scale 2,3)   = {(scale_2d(2, 3).determinant())}")
+    print(f"det(shear kx=1)  = {(shear_2d(1, 0).determinant()):.1f}")
+    print(f"det(reflect y)   = {(reflection_around_y().determinant()):.1f}")
+
+
+    singular = Matrix([[1, 2], [2, 4]])
+    print(f"det(singular)     = {(singular).determinant()}")
+    print("Singular: columns are proportional, space collapses to a line.")
+    
+    
+
 if __name__ == "__main__":
     main();
