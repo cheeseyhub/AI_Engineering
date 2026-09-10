@@ -1,7 +1,6 @@
 import numpy as np;
 x = np.array([1,2,3,4,5],dtype=float);
-y = np.array([3,5,7,9,11],dtype=float);
-
+y = np.array([3.0, 5.0, 7.0, 9.0, 11.0],dtype=float)
 
 # predicting the function 2x + 1;
 
