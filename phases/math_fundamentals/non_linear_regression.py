@@ -19,7 +19,9 @@ learning_rate = 0.1
 
 
 
-# 
+# dw1 = error**2 -> 2(error) *x^2
+# dw2 = 2(error) * x
+
 
 for epoch in range(30000):
     prediction = (weight1 * x *x) + (weight2 * x) + bias;
