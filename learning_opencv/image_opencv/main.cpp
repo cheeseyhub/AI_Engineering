@@ -3,35 +3,13 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <iostream>
+#include "image_class.hpp"
 
 using namespace cv;
 int main()
 {
-
-    std::string image_path = samples::findFile("image.jpg");
-    Mat img = imread(image_path, IMREAD_COLOR);
-
-    if (img.empty())
-    {
-        std::cout << "Could not read the image:  " << image_path << std::endl;
-
-        return 1;
-    }
-
-    namedWindow("Display Window", WINDOW_NORMAL);
-
-    cvtColor(img, img, COLOR_BGR2GRAY);
-    imshow("Display Window", img);
-
-    while (true)
-    {
-        int k = waitKey(0);
-
-        if (k == 'q')
-        {
-            break;
-        }
-    }
-    destroyAllWindows();
+    image_class image("image.jpg");
+    image.open_window_normal();
+    image.wait_close_window();
     return 0;
 }
