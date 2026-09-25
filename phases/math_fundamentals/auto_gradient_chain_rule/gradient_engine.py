@@ -10,11 +10,30 @@ class Value:
     def __repr__(self):
         return f"Value(data={self.data:.4f}, grad={self.grad:.4f})";
 
+    def __add__(self,other):
+        other = other if isinstance(other,Value) else Value(other);
+        out = Value(self.data + other.data , (self,other),"+");
+        def _backward():
+            self.grad += out.grad;
+            other.grad += out.grad;
+        out._backward = _backward;
+        return out;
 
-# This creates the point 2.0 at which the gradient will be calculated.
-x = torch.tensor(2.0,requires_grad=True);
-y = x ** 2 + 3 *x + 1;
+    def __mul__(self,other):
+        other = other if isinstance(other,Value) else Value(other);
+        out = Value(self.data * other.data , (self,other) ,"*");
+        def _backward():
+            self.grad += other.data * out.grad;
+            other.grad += self.data * out.grad;
+        out._backward = _backward;
+        return out;
 
-# Doing back propogation on the function
-y.backward();
-print(x.grad)
+    def relu(self):
+        out = Value(max(0,self.data),(self,),'relu');
+        def _backward():
+            self.grad +=(1.0 if out.data > 0 else 0.0) * out.grad;
+        out._backward = _backward;
+        return out;
+
+
+
