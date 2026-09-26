@@ -36,4 +36,26 @@ class Value:
         return out;
 
 
+    def backward(self):
+        topo = [];
+        visited = set();
+        def build_topo(v):
+            if v not in visited:
+                visited.add(v);
+                for child in v._prev:
+                    build_topo(child);
+                topo.append(v);
+        build_topo(self);
+
+        self.grad = 1.0
+        for v in reversed(topo):
+            v._backward();
+
+# y = m + 2; -> dy/dm = 1;
+# m = 2x + 6; -> dm/dx = 2
+# dy / dx = dy/dm  * dm /dx = 2 ;
+# f(g(t(x))) => f'(g(t(x)))  * g'(t(x)) * (t(x))  * x';
+
+
+
 
