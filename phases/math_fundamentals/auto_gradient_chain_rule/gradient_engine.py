@@ -34,6 +34,8 @@ class Value:
             self.grad +=(1.0 if out.data > 0 else 0.0) * out.grad;
         out._backward = _backward;
         return out;
+    def __neg__(self):
+        return self * -1;
 
 
     def backward(self):
