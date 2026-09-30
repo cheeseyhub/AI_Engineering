@@ -34,8 +34,6 @@ class Value:
             self.grad +=(1.0 if out.data > 0 else 0.0) * out.grad;
         out._backward = _backward;
         return out;
-    def __neg__(self):
-        return self * -1;
 
 
     def backward(self):
@@ -53,10 +51,21 @@ class Value:
         for v in reversed(topo):
             v._backward();
 
-# y = m + 2; -> dy/dm = 1;
-# m = 2x + 6; -> dm/dx = 2
-# dy / dx = dy/dm  * dm /dx = 2 ;
-# f(g(t(x))) => f'(g(t(x)))  * g'(t(x)) * (t(x))  * x';
+    def __neg__(self):
+        return self * -1;
+
+    def __sub__(self, other):
+        return self + (-other);
+
+    def __radd__(self, other):
+        return self + other;
+
+    def __rmul__(self, other):
+        return self  * other;
+    def __rsub__(self, other):
+        return other + (-self);
+        
+
 
 
 
