@@ -28,6 +28,7 @@ class Value:
         out._backward = _backward;
         return out;
 
+ # du/da * da/dl * dl /dl
     def relu(self):
         out = Value(max(0,self.data),(self,),'relu');
         def _backward():
@@ -64,6 +65,44 @@ class Value:
         return self  * other;
     def __rsub__(self, other):
         return other + (-self);
+
+    def __pow__(self, n):
+        out = Value(self.data ** n, (self,),f'**{n}')
+        # Applying the power rule x^n -> n*x^n-1 * x'
+        def _backward():
+            self.grad += n* (self.data ** (n-1)) * out.grad;
+            out._backward = _backward;
+        return out;
+
+    # f(x) / g(x) -> f(x) * g(x)^-1
+    def __truediv__(self, other):
+        return self*(other ** -1) if isinstance(other ,Value) else self * (Value(other) ** -1);
+
+    def exp(self):
+        import math
+        e = math.exp(self.data);
+        out = Value(e,(self,),'exp');
+        def _backward():
+            self.grad += e *out.grad;
+        out._backward = _backward;
+        return out;
+
+    def log(self):
+        import math
+        out = Value(math.log(self.data),(self,),'log')
+        def _backward():
+            self.grad +=(1.0 / self.data) * out.data;
+        out._backward = _backward;
+
+        
+    def tanh(self):
+        import math
+        t = math.tanh(self.data);
+        out = Value(t, (self,), 'tanh');
+        def _backward():
+            self.grad += (1 - t**2) * out.grad;
+        out._backward = _backward;
+        return out;
         
 
 
