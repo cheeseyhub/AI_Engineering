@@ -1,4 +1,3 @@
-import torch
 class Value:
     def __init__(self,data, children=(), op=''):
         self.data = data;
