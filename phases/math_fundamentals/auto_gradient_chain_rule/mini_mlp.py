@@ -20,7 +20,7 @@ class Neuron:
 # n outputs means n neurons
 class Layer:
     def __init__(self,n_inputs, n_outputs):
-        self.neurons = [Neuron[n_inputs] for _ in range(n_outputs)]
+        self.neurons = [Neuron(n_inputs) for _ in range(n_outputs)]
 
         
     def __call__(self,x):
@@ -37,7 +37,7 @@ class MLP:
 
     def __call__(self, x):
         for layer in self.layers:
-            x = self.layer(x);
+            x = layer(x);
             return x[0] if len(x) == 1 else x;
 
     def parameters(self):
