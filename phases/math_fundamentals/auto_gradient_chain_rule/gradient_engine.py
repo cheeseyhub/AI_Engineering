@@ -70,7 +70,7 @@ class Value:
         # Applying the power rule x^n -> n*x^n-1 * x'
         def _backward():
             self.grad += n* (self.data ** (n-1)) * out.grad;
-            out._backward = _backward;
+        out._backward = _backward;
         return out;
 
     # f(x) / g(x) -> f(x) * g(x)^-1
@@ -90,7 +90,7 @@ class Value:
         import math
         out = Value(math.log(self.data),(self,),'log')
         def _backward():
-            self.grad +=(1.0 / self.data) * out.data;
+            self.grad +=(1.0 / self.data) * out.grad;
         out._backward = _backward;
 
         
