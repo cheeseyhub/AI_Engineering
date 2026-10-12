@@ -1,6 +1,10 @@
 from gradient_engine import Value
 import random
 
+
+    
+
+
 class Neuron:
     def __init__(self, n_inputs):
         self.w = [Value(random.uniform(-1,1)) for _ in range(n_inputs)];

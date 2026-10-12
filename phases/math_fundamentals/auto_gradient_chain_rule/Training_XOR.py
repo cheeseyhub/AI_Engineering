@@ -12,6 +12,7 @@ xs = [[0,0],[0,1],[1,0],[1,1]];
 ys = [-1,1,1,-1];
 
 
+
 for step in range(1000):
     preds = [model(x) for x in xs];
 
