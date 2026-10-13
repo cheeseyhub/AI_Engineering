@@ -1,6 +1,6 @@
 
-from Matrix import Matrix
-from Vector import Vector
+from math_fundamentals.linear_algebra.Matrix import Matrix
+from math_fundamentals.linear_algebra.Vector import Vector
 import math;
 
 

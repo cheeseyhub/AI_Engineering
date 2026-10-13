@@ -2,7 +2,7 @@ import random;
 import numpy as np
 random.seed(42);
 
-from  Vector import Vector;
+from  math_fundamentals.linear_algebra.Vector import Vector;
 class Matrix:
     def __init__(self,rows) -> None:
         self.rows = [list(row) for row in rows];

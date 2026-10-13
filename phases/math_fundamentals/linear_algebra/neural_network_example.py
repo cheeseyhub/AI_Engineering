@@ -1,5 +1,5 @@
 import random
-from Matrix import Matrix
+from math_fundamentals.linear_algebra.Matrix import Matrix
 
 inputs = Matrix([
     [0.5],

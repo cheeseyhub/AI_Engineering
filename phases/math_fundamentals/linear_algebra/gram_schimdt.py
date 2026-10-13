@@ -1,5 +1,5 @@
-from Matrix import Matrix
-from Vector import Vector
+from math_fundamentals.linear_algebra.Matrix import Matrix
+from math_fundamentals.linear_algebra.Vector import Vector
 
 def is_linearly_independent(vectors )->bool:
     n = len(vectors);

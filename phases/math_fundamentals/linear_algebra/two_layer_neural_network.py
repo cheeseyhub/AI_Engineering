@@ -2,7 +2,7 @@
 # create a two-layer neural network: input (3) -> hidden (4) -> output (2).
 # Initialize random weights, run a forward pass, and verify all shapes are correct.
 #
-from Matrix import Matrix
+from math_fundamentals.linear_algebra.Matrix import Matrix
 import numpy as np
 
 def relu_matrix(m):
