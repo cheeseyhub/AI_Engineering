@@ -50,6 +50,10 @@ def variance(values, probabilities):
     mu = expected_value(values,probabilities);
     return sum(p*(v - mu)** 2 for v,p in zip(values,probabilities));
 
+    
+def sample_bernoulli(p,n=1):
+    return [1 if random.random() < p else 0 for _ in range(n)];
+
 
 
 
