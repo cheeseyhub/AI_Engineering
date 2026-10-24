@@ -55,6 +55,23 @@ def sample_bernoulli(p,n=1):
     return [1 if random.random() < p else 0 for _ in range(n)];
 
 
+def sample_categorical(probs , n =1 ):
+    cumulative = [];
+    total = 0;
+    for p in probs:
+        total += p;
+        cumulative.append(total);
+        
+    samples = [];
+    for _ in range(n):
+        r = random.random();
+        for i  ,c in enumerate(cumulative):
+            if r <= c:
+                samples.append(i);
+                break;
+    return samples;
+                
+
 
 
 p_king_given_face = conditional_probability(4 / 52, 12 / 52);
