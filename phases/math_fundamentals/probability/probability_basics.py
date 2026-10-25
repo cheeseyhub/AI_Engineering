@@ -39,8 +39,9 @@ def uniform_pdf(x,a,b):
 def normal_pdf(x,mu,sigma):
     coeff = 1.0 / (sigma * math.sqrt(2 * math.pi))
     exponent = -0.5 * (((x-mu)) / sigma) ** 2;
-    
     return coeff * math.exp(exponent);
+
+
 
 def expected_value(values,probabilities):
     return sum(v * p for v,p in zip(values, probabilities))
@@ -70,6 +71,17 @@ def sample_categorical(probs , n =1 ):
                 samples.append(i);
                 break;
     return samples;
+
+    
+def sample_normal_box_muller(mu,sigma,n=1):
+    samples = [];
+    for _ in range(n):
+        u1 = random.random();
+        u2 = random.random();
+        z = math.sqrt(-2 * math.log(u1)) * math.cos(2*math.pi*u2);
+        samples.append(mu + sigma * z);
+    return samples;
+
                 
 
 
