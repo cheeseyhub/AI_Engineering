@@ -83,7 +83,12 @@ def sample_normal_box_muller(mu,sigma,n=1):
     return samples;
 
                 
-
+def softmax(logits):
+    max_logit = max(logits);
+    shifted = [z - max_logit for z in logits];
+    exps = [math.exp(z) for z in shifted];
+    total = sum (exps);
+    return [e / total for e in exps];
 
 
 p_king_given_face = conditional_probability(4 / 52, 12 / 52);
