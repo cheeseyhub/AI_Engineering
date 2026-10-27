@@ -90,6 +90,14 @@ def softmax(logits):
     total = sum (exps);
     return [e / total for e in exps];
 
+def log_soft_max(logits):
+    max_logit = max(logits);
+    shifted = [z - max_logit for z in logits];
+    numerators = [math.log(math.exp(z)) for z in shifted];
+    total_sum_denominator = math.log(sum([math.exp(z) for z in shifted]));
+    return [z - total_sum_denominator for z in numerators];
+
+
 
 p_king_given_face = conditional_probability(4 / 52, 12 / 52);
 print(f"P(King | Face card) = {p_king_given_face:.4f}")
@@ -99,3 +107,7 @@ die_probs = [1/6] * 6
 mu = expected_value(die_values, die_probs)
 var = variance(die_values, die_probs)
 print(f"Die: E[X] = {mu:.4f}, Var(X) = {var:.4f}, SD = {var**0.5:.4f}")
+
+
+array = [100,101,102];
+print(log_soft_max(array));
