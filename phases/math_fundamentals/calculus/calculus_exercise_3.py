@@ -1,9 +1,11 @@
 import numpy as np
 import time
 
-def loss_function_to_minimize(x):
-    return (x**4 - (3*x**2))
-
+def loss_function_to_minimize(x,h=0):
+    left_of_point = (x-h)**4   - (3*(x-h)**2);
+    right_of_point = (x+h)**4  - (3*(x+h)**2);
+    average_of_point = (right_of_point - left_of_point) / (2*h);
+    return average_of_point 
     
     
 start_time_with_out_velocity = time.perf_counter();
@@ -12,7 +14,7 @@ learning_rate = 0.001;
 x =np.array([10,-10],dtype=float);
 
 for epoch in range(70000):
-    d_function = ( (4* (x**3)) - (6*x));
+    d_function = loss_function_to_minimize(x,1e-10);
     x = x - (learning_rate* d_function);
     x = np.round(x,decimals=10)
 
