@@ -1,4 +1,5 @@
 import math;
+import matplotlib.pyplot as plt
 import random;
 
 def factorial(n):
@@ -13,6 +14,8 @@ def factorial(n):
 def combinations(n,k):
     return factorial(n) // (factorial(n) * factorial(n -k));
 
+def permutation(n,k = 0):
+    return factorial(n) // factorial(n- k);
     
     
 def conditional_probability(p_a_and_b, p_b):
@@ -98,6 +101,14 @@ def log_soft_max(logits):
     return [z - total_sum_denominator for z in numerators];
 
 
+def demonstrate_clt(dist_fn, n_samples, n_averages):
+    averages = [];
+    for _ in range(n_averages):
+        samples = [dist_fn() for _ in range(n_samples)];
+        averages.append(sum(samples) / len(samples));
+    return averages
+
+
 
 p_king_given_face = conditional_probability(4 / 52, 12 / 52);
 print(f"P(King | Face card) = {p_king_given_face:.4f}")
@@ -111,3 +122,13 @@ print(f"Die: E[X] = {mu:.4f}, Var(X) = {var:.4f}, SD = {var**0.5:.4f}")
 
 array = [100,101,102];
 print(log_soft_max(array));
+
+
+# sigma is the standared deviation;
+
+sigma = 0.5
+xs = [mu + sigma * ( i - 500) / 100 for i in range(1001)];
+ys = [normal_pdf(x,mu,sigma) for x in xs] ;
+
+plt.plot(xs,ys)
+plt.show();
