@@ -27,18 +27,27 @@ the inverse will tell the point at which the event when given the probability
 """
 
 import math
+import random
+import matplotlib.pyplot as plt;
 
 
-def inverse_exponential_distribution(average_rate , probability):
+def inverse_exponential_distribution(average_rate , probability ):
 
     average_inverse = -1 / average_rate;
 
     return average_inverse * math.log(probability);
 
-    
-    
-    
-print(inverse_exponential_distribution(0.5,0.2));
 
 
+lambda_param = 0.02
+data = [inverse_exponential_distribution(lambda_param, 1.0 - random.random()) for _ in range(10000)]
 
+plt.hist(data, bins=50, density=True, alpha=0.6, color='skyblue', label='Sampled Histogram')
+
+max_val = max(data)
+x_pdf = [i * (max_val / 200) for i in range(2001)]
+y_pdf = [lambda_param * math.exp(-lambda_param * x) for x in x_pdf]
+plt.plot(x_pdf, y_pdf, color='red', linewidth=2, label='True PDF')
+
+plt.legend()
+plt.show()
