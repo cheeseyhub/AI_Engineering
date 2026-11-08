@@ -6,7 +6,36 @@ Build a joint distribution table for two loaded dice. Compute the marginal distr
 
 From what i know i need to build a table for one loaded die lets say x 
 and then one for  a die named y.
-
-
 """
+import random
+import math
 
+# Table 1 for loaded dice 1;
+
+x = [random.random() for _ in range(6)];
+x = [element  / sum(x) for element in x];
+
+# Table 2 for loaded dice 2;
+
+y = [random.random() for _ in range(6)];
+y = [element  / sum(y) for element in y];
+
+
+
+
+## Making the marignal table by multiplying the probabilities
+grid = [ [ x[i] * y[j] for i in range(len(x)) ] for j in range(len(y)) ]
+
+
+## summing the row to find the actual  value
+
+Y_marginal = sum(grid[0]);
+print(y[0])
+print(Y_marginal)
+print(math.isclose(Y_marginal,y[0]));
+
+        
+
+
+
+    
