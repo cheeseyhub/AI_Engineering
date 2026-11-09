@@ -29,12 +29,30 @@ grid = [ [ x[i] * y[j] for i in range(len(x)) ] for j in range(len(y)) ]
 
 ## summing the row to find the actual  value
 
-Y_marginal = sum(grid[0]);
-print(y[0])
-print(Y_marginal)
-print(math.isclose(Y_marginal,y[0]));
+
+## Matching the row sum
+for i in range(len(grid)):
+    rowSum = 0;
+    for j in range(len(grid[0])):
+        rowSum +=grid[i][j];
+        
+        
+    print(rowSum);
+    print(y[i]);
+    print(math.isclose(rowSum,y[i]));
 
         
+
+## Matching the column sum
+
+for i in range(len(grid)):
+    columnSum = 0;
+    for j in range(len(grid[0])):
+        columnSum +=grid[j][i];
+
+    print(columnSum);
+    print(x[i]);
+    print(math.isclose(columnSum,x[i]));
 
 
 
