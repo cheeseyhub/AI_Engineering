@@ -29,31 +29,37 @@ grid = [ [ x[i] * y[j] for i in range(len(x)) ] for j in range(len(y)) ]
 
 ## summing the row to find the actual  value
 
+def independence(grid,dice1,dice2):
+    independent = False;
+    ## Matching the row sum
+    for i in range(len(grid)):
+        rowSum = 0;
+        for j in range(len(grid[0])):
+            rowSum +=grid[i][j];
+            
+            
+        independent = (math.isclose(rowSum,dice1[i]));
 
-## Matching the row sum
-for i in range(len(grid)):
-    rowSum = 0;
-    for j in range(len(grid[0])):
-        rowSum +=grid[i][j];
+            
+
+    ## Matching the column sum
+
+    for i in range(len(grid)):
+        columnSum = 0;
+        for j in range(len(grid[0])):
+            columnSum +=grid[j][i];
+
         
-        
-    print(rowSum);
-    print(y[i]);
-    print(math.isclose(rowSum,y[i]));
+        independent= math.isclose(columnSum,dice2[i]);
 
-        
+    return independent;
 
-## Matching the column sum
-
-for i in range(len(grid)):
-    columnSum = 0;
-    for j in range(len(grid[0])):
-        columnSum +=grid[j][i];
-
-    print(columnSum);
-    print(x[i]);
-    print(math.isclose(columnSum,x[i]));
+    
+    
+print(independence(grid,y,x))
 
 
 
     
+
+'''Finished Exercise 3 and got the concept of joinpt probability and marignal probability down'''
