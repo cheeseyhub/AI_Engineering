@@ -14,7 +14,7 @@ f(x) = 1 - e^(-lambada * x);
 
 
 so  its inverse is 
-
+f(t) = l * e^ l*t;
 x = -1/lambda  * ln( 1- U);
 where lambda is the average rate and U is the point in time
 

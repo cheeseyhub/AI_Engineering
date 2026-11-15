@@ -1,3 +1,5 @@
+import math
+from collections import defaultdict
 """
 p(B) = p(B | A) * P(A) + P(B | not A ) * p(not A)
 
@@ -18,3 +20,6 @@ def bayes(prior, likelihood, false_positive_rate):
     
 result = bayes(prior=0.0001, likelihood=0.99, false_positive_rate=0.01)
 print(f"P(sick|positive) = {result:.4f}")
+
+
+

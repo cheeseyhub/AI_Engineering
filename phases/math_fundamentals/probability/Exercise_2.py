@@ -24,7 +24,7 @@ y = [element  / sum(y) for element in y];
 
 
 ## Making the marignal table by multiplying the probabilities
-grid = [ [ x[i] * y[j] for i in range(len(x)) ] for j in range(len(y)) ]
+grid = [ [x[i] * y[j] for i in range(len(x)) ] for j in range(len(y)) ]
 
 
 ## summing the row to find the actual  value
@@ -51,6 +51,9 @@ def independence(grid,dice1,dice2):
 
         
         independent= math.isclose(columnSum,dice2[i]);
+
+        
+    
 
     return independent;
 

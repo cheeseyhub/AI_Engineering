@@ -15,6 +15,7 @@ def soft_max(inputs):
     return [(math.exp(x) / total) for x in inputs];
 
 
+
 x = [2.0,0.5,-1.0,3.0,0.1];
 # activating the logits with softmax
 y = soft_max(x);
