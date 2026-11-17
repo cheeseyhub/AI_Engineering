@@ -22,4 +22,11 @@ result = bayes(prior=0.0001, likelihood=0.99, false_positive_rate=0.01)
 print(f"P(sick|positive) = {result:.4f}")
 
 
+"""
+Todo: Build a naive Bayer classifier which is used in spam filtering  and recommendation systems.
+
+"""
+
+
+
 
