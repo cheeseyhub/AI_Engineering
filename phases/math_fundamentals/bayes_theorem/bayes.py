@@ -24,10 +24,18 @@ print(f"P(sick|positive) = {result:.4f}")
 
 """
 Todo: Build a naive Bayer classifier which is used in spam filtering  and recommendation systems.
-
-Learned about Bayer theorem and solved a few problems. Missed my streak because I pushed to the repo of my group mate .
-Did some algorithim practice and DSA lab today. Going to prepare for the hackathon.
 """
+
+class NaiveBayes:
+    def __init__(self,smoothing = 1.0):
+        self.smoothing = smoothing;
+        self.class_counts = defaultdict(int);
+        self.word_counts = defaultdict(lambda: defaultdict(int));
+        self.class_word_totals = defaultdict(int);
+        self.vocab = set();
+        
+
+
 
 
 
