@@ -34,6 +34,14 @@ class NaiveBayes:
         self.class_word_totals = defaultdict(int);
         self.vocab = set();
         
+    def train(self,documents, labels):
+        for doc, label in zip(documents, labels):
+            self.class_counts[label] +=1;
+            words= doc.lower().split();
+            for word in words:
+                self.word_counts[label][word]+= 1;
+                self.class_word_totals[label] +=1;
+                self.vocab.add(word);
 
 
 
